@@ -1,9 +1,9 @@
 import { PDFDocument } from "pdf-lib"
 import * as pdfjs from "pdfjs-dist"
 
-// Configurar el worker de PDF.js
-const pdfjsWorker = await import("pdfjs-dist/build/pdf.worker.entry")
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
+// Configuración del worker correcta - opción 1
+import { GlobalWorkerOptions } from 'pdfjs-dist';
+GlobalWorkerOptions.workerSrc = 'pdfjs-dist/build/pdf.worker.mjs';
 
 interface MenuItemExtracted {
   name: string
@@ -127,4 +127,3 @@ export async function extractLogosFromPDF(pdfBuffer: ArrayBuffer): Promise<strin
     throw new Error("Failed to extract logos from PDF")
   }
 }
-
